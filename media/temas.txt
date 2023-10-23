@@ -1,0 +1,39 @@
+<!--->
+
+*RED:
+>Definición de red
+
+--Parte física de red--
+>Topología de red
+>Alcance de red
+>Repetidor(Qué es, para qué sirve)
+>Access point(Qué es, para qué sirve)
+>Hub(Qué es, para qué sirve)
+>Switch(Qué es, para qué sirve)
+>Router(Qué es, para qué sirve)
+
+--Parte lógica de red--
+>DHCP(Qué es, para qué sirve)
+>DNS(Qué es, para qué sirve)
+>Dirección MAC(Qué es, para qué sirve)
+>SERVIDOR y HOST(Qué es, para qué sirve)
+>VPN(Qué es, para qué sirve)
+*Dirección IP
+    >Qué es, para qué sirve
+    >Ip publica
+    >Ip privada
+    >Rangos de Ip
+    >Mascara de red
+    >IPV4 e IPV6
+
+
+
+
+
+
+
+
+
+
+
+
