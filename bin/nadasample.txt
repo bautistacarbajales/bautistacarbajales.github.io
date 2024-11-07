@@ -1,0 +1,74 @@
+function obtenerDatosMenu() {
+  if (!tokenAccess) {
+    console.log("Primero debe establecer la conexión.");
+    return;
+  }
+
+  fetch("https://api-mconn.maxisistemas.com.ar/menuweb/menuextendido", {
+    method: "GET",
+    headers: { Authorization: "Bearer " + tokenAccess },
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json); // Para inspeccionar la respuesta completa
+      const data = json.content; // Array de rubros
+      let tableBody = document.getElementById("tabla-body");
+
+      // Limpiar el contenido previo de la tabla
+      tableBody.innerHTML = "";
+
+      // Recorrer cada rubro
+      data.forEach((rubro) => {
+        // También verificar los subrubros
+        if (rubro.subrubros && rubro.subrubros.length > 0) {
+          rubro.subrubros.forEach((subrubro) => {
+            // Recorrer los artículos de cada subrubro
+            if (subrubro.articulos && subrubro.articulos.length > 0) {
+              subrubro.articulos.forEach((articulo) => {
+                let row = document.createElement("tr");
+                row.setAttribute("data-rubro", rubro.nombre); // Asignar el rubro como atributo de datos
+
+                // Crear filas con los datos de los artículos
+                row.innerHTML = `
+                  <td>${articulo.id}</td>
+                  <td>${articulo.nombre}</td>
+                  <td>${articulo.precio}</td>
+                  <td id="venta-competencia-${articulo.id}">--</td>
+                  <td id="costo-${articulo.id}">---</td>
+                  <td id="porc-costo-${articulo.id}">--</td>
+                  <td id="porc-objetivo-${articulo.id}">--</td>
+                  <td id="porc-sugerido-${articulo.id}">--</td>
+                  <td><input type="number" placeholder="$ Manual" class="form-control"  id="precio-manual-${articulo.id}"></td>
+                  <td id="ventas-${articulo.id}">--</td>
+                  <td id="ganancia-${articulo.id}">--</td>
+                  <td id="lista-${articulo.id}">--</td>
+                  <td id="off-10-${articulo.id}">--</td>
+                  <td id="off-20-${articulo.id}">--</td>
+                  <td id="off-2x1-${articulo.id}">--</td>
+                `;
+                tableBody.appendChild(row);
+              });
+            }
+          });
+        }
+      });
+    })
+    .catch((err) => console.log(err));
+}
+
+
+function filtrarPorRubro(rubro) {
+  const tableBody = document.getElementById("tabla-body");
+  const rows = tableBody.getElementsByTagName("tr");
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const rowRubro = row.getAttribute("data-rubro");
+
+    if (rubro === "todos" || (rowRubro && rowRubro.includes(rubro))) {
+      row.style.display = ""; // Mostrar fila
+    } else {
+      row.style.display = "none"; // Ocultar fila
+    }
+  }
+}	
