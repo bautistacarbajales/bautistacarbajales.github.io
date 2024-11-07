@@ -1,6 +1,11 @@
 let tokenAccess = null; // Variable para almacenar el token de acceso
 let menuData = [];
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  establecerConexion();
+});
+
 function establecerConexion() {
   const loginData = {
     email: "diegosebastianalbo@gmail.com",
@@ -160,9 +165,44 @@ function obtenerDatosPedidosMostrador() {
     .catch((err) => console.log(err));
 }
 
+
 function filtrarPorRubro(rubro) {
+  const subrubrosListItems = document.querySelectorAll('#subrubros-list .list-group-item');
+
+  subrubrosListItems.forEach(item => {
+    const rubros = item.getAttribute('data-rubro').split(',');
+    if (rubro === "todos" || rubros.includes(rubro)) {
+      item.style.display = 'block'; // Mostrar el subrubro
+    } else {
+      item.style.display = 'none'; // Ocultar el subrubro
+    }
+    if (rubro === "todos") {
+      renderizarTabla(menuData);
+      return;
+    }
+  
+    const filteredData = menuData.filter((r) => {
+      if (r.nombre.includes(rubro)) return true;
+      return r.subrubros.some((subrubro) => subrubro.nombre.includes(rubro));
+    });
+  
+    renderizarTabla(filteredData);
+  });
+}
+
+/*
+function filtrarPorRubro(rubro) {
+  const subrubrosListItems = document.querySelectorAll('#subrubros-list .list-group-item');
+
+  subrubrosListItems.forEach(item => {
+    if (rubro === "todos" || item.getAttribute('data-rubro') === rubro) {
+      item.style.display = 'block'; // Mostrar el subrubro
+    } else {
+      item.style.display = 'none'; // Ocultar el subrubro
+    }
+  });
+
   if (rubro === "todos") {
-    // Si el filtro es "todos", renderizar todos los datos
     renderizarTabla(menuData);
     return;
   }
@@ -173,6 +213,20 @@ function filtrarPorRubro(rubro) {
   });
 
   renderizarTabla(filteredData);
+}
+*/
+
+function mostrarSubrubros(subrubros, rubro) {
+  const subrubrosList = document.getElementById("subrubros-list");
+  subrubrosList.innerHTML = ""; // Limpiar lista de subrubros
+
+  subrubros.forEach(subrubro => {
+    const li = document.createElement("li");
+    li.className = "list-group-item btn btn-secondary rounded";
+    li.textContent = subrubro;
+    li.setAttribute("data-rubro", rubro); // Asignar el rubro como atributo de datos
+    subrubrosList.appendChild(li);
+  });
 }
 
 //Only testing.
