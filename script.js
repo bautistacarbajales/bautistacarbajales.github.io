@@ -174,3 +174,14 @@ function filtrarPorRubro(rubro) {
 
   renderizarTabla(filteredData);
 }
+
+//Only testing.
+
+document.querySelector('.form-control[data-search]').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const filteredData = menuData.filter(articulo => 
+    articulo.nombre.toLowerCase().includes(searchTerm) ||
+    articulo.id.toString().includes(searchTerm)
+  );
+  renderizarTabla(filteredData);
+});
