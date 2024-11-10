@@ -1,0 +1,42 @@
+Todos
+Comida
+Bebida
+Cocteleria
+Cafeteria
+Combos
+Festejos
+
+
+SUBRUBROS POR AGREGAR:
+CombosResto,CombosDomicilio,SinRubro,CombosMarketplace,CostoPromedio,SinPrecio,FechasEspeciales,SinprecioComida,SinprecioTragos,HappyHourCoctel,HappyHourBirratlon,HappyNight2x1,FestejoComida,FestejoBebida,FestejoVarios,CombosArtistas,FestejosFC,Festejos+12,FestejosInfantes
+
+RUBROS Y SUBRURBOS TOPIC.
+
+LA API DESCARGA UN ARRAY DE ARTICULOS. LOS ARTICULSO POSEEN UNA PROPIEDAD 'RUBRO' QUE REALMENTE ES EL SUBRUBRO.
+DENTRO DE ESTE ARTICULO, VIENE ADJUNTO OTRO ARRAY CON UNA PROPIEDAD 'SUBRUBRO' QUE REALMENTE ES EL RUBRO.
+
+
+function filtrarPorRubro(rubro) {
+  if (rubro === "todos") {
+    renderizarTabla(menuData);
+    mostrarSubrubros([], "todos");
+    return;
+  }
+
+  const filteredData = menuData.filter((r) => {
+    if (r.nombre.includes(rubro)) return true;
+    return r.subrubros.some((subrubro) => subrubro.nombre.includes(rubro));
+  });
+
+  renderizarTabla(filteredData);
+
+  // Obtener subrubros del rubro seleccionado
+  const subrubros = filteredData.reduce((acc, r) => {
+    if (r.nombre.includes(rubro)) {
+      acc.push(...r.subrubros.map(subrubro => subrubro.nombre));
+    }
+    return acc;
+  }, []);
+
+  mostrarSubrubros(subrubros, rubro);
+}

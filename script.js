@@ -62,6 +62,13 @@ function renderizarTabla(data) {
     if (rubro.subrubros && rubro.subrubros.length > 0) {
       rubro.subrubros.forEach((subrubro) => {
         if (subrubro.articulos && subrubro.articulos.length > 0) {
+          // Crear un encabezado para el subrubro
+          let subrubroHeader = document.createElement("tr");
+          subrubroHeader.innerHTML = `
+            <th colspan="15" class="subrubro-header">${rubro.nombre}</th>
+          `;
+          tableBody.appendChild(subrubroHeader);
+
           subrubro.articulos.forEach((articulo) => {
             let row = document.createElement("tr");
             row.setAttribute("data-rubro", rubro.nombre); // Asignar el rubro como atributo de datos
@@ -91,6 +98,7 @@ function renderizarTabla(data) {
   });
 }
 
+/* No Esta en uso */
 
 function obtenerDatosFacturacionPorFecha() {
   if (!tokenAccess) {
@@ -127,6 +135,10 @@ function obtenerDatosFacturacionPorFecha() {
     })
     .catch((err) => console.log(err));
 }
+
+
+
+/* No Esta en uso */
 
 function obtenerDatosPedidosMostrador() {
   if (!tokenAccess) {
@@ -229,8 +241,11 @@ function mostrarSubrubros(subrubros, rubro) {
   });
 }
 
-//Only testing.
 
+
+//Only testing.
+//Busqueda por input.
+/*
 document.querySelector('.form-control[data-search]').addEventListener('input', function() {
   const searchTerm = this.value.toLowerCase();
   const filteredData = menuData.filter(articulo => 
@@ -239,3 +254,27 @@ document.querySelector('.form-control[data-search]').addEventListener('input', f
   );
   renderizarTabla(filteredData);
 });
+
+
+function moveSubrubrosToDropdown() {
+  const subrubrosList = document.getElementById('subrubros-list');
+  const dropdownHolder = document.querySelector('.dropdown-holder');
+
+  if (window.innerWidth < 750) {
+    if (!dropdownHolder.contains(subrubrosList)) {
+      dropdownHolder.appendChild(subrubrosList);
+    }
+  } else {
+    const categoriasSection = document.querySelector('.categorias');
+    if (!categoriasSection.contains(subrubrosList)) {
+      categoriasSection.appendChild(subrubrosList);
+    }
+  }
+}
+
+// Call the function on window resize
+window.addEventListener('resize', moveSubrubrosToDropdown);
+
+// Call the function on initial load
+document.addEventListener('DOMContentLoaded', moveSubrubrosToDropdown);
+*/

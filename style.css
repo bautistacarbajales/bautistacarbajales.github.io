@@ -1,3 +1,4 @@
+/* !Global Styles */
 * {
   margin: 0px;
   padding: 0px;
@@ -14,6 +15,9 @@ body {
   color: whitesmoke;
 }
 
+/* !Header Styles */
+
+
 .header {
   width: 100%;
   height: 15%;
@@ -22,12 +26,6 @@ body {
   align-items: center;
   justify-content: space-between;
   background: #12111F;
-}
-
-.form-select{
-  width: min-content;
-  margin-top: 15px;
-  line-height: 100%;
 }
 
 .items-header {
@@ -39,6 +37,18 @@ body {
   height: 100%;
 }
 
+.dropdown-holder{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.dropwdown-subrubros{
+  display: none;
+}
+
 .title-header {
   height: 100%;
   display: flex;
@@ -48,8 +58,7 @@ body {
   color: #5AC2E7;
 }
 
-
-.title-divider{
+.title-divider {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -57,15 +66,63 @@ body {
   padding: 0px;
 }
 
-h3{ font-size: 40px; }
-small{ color:#FEFEFE; }
-.title-header a { margin: 1vw; }
+.title-header a {
+  margin: 1vw;
+}
 
 .header input {
   margin: 1vh;
   width: 50%;
 }
 
+/* !Typography */
+h3 {
+  font-size: 40px;
+}
+
+h5 {
+  line-height: 100%;
+  font-size: 4vh;
+}
+
+small {
+  color: #FEFEFE;
+}
+
+/* !Form Styles */
+.form-select {
+  width: min-content;
+  margin-top: 15px;
+  line-height: 100%;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #171717;
+}
+
+form {
+  background: #171717;
+  height: 90%;
+  width: 60%;
+  padding: 2vh;
+}
+
+.input-holder {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  margin-top: 2vh;
+}
+
+/* !Layout Styles */
 .father {
   height: 100%;
   width: 100%;
@@ -76,35 +133,18 @@ small{ color:#FEFEFE; }
   background: #12111F;
 }
 
-
-.father .categorias a{
-  width: 100%;
-  text-decoration: none;
-  color: black;
-}
-
-.header-subrubros{
-  width: 100%;
-  height: 100%;
-  font-size: 4vh;
-  text-align: center;
-  color: #FEFEFE;
-  background-color: #595C5F;
-
-}
-
 .categorias {
-  max-height: 80vh; /* Altura fija para el contenedor de la lista */
+  max-height: 80vh;
   width: 17%;
-  overflow-y: auto; /* Permitir desplazamiento vertical */
+  overflow-y: auto;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   background: #12111F;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .categorias::-webkit-scrollbar {
@@ -112,73 +152,214 @@ small{ color:#FEFEFE; }
   height: 0;
 }
 
-
-
-.list-group-item {
-  margin-bottom: 5px; /* Espacio entre los elementos de la lista */
-  cursor: pointer; /* Cambiar el cursor al pasar sobre los elementos */
+.father .categorias a {
+  width: 100%;
+  text-decoration: none;
+  color: black;
 }
 
+.subrubros-title {
+  width: 100%;
+  font-size: 5vh;
+  background: #555;
+  padding: 1vh;
+  line-height: 100%;
+  text-align: center;
+}
 
+.list-group-item {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
 
-ul { width: 100%; }
-li { 
+ul {
+  width: 100%;
+}
+
+li {
   margin: 1vh;
   list-style: none;
 }
 
+/* !Table Styles */
 .contenido {
   height: 100%;
   width: 100%;
-  background:#171717;
+  background: #171717;
   color: #FEFEFE;
   border-collapse: collapse;
 }
 
-.pupito{
+.table-holder {
   height: 80vh;
   width: 78.5%;
   padding: 1vh;
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.pupito::-webkit-scrollbar {
+.table-holder::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-
-th,td {
-  border: 1px solid #555;
+th, td {
+  border: 1px solid lightgray;
   padding: 10px;
   text-align: center;
   line-height: 20px;
 }
 
-input[type="number"] {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #171717;
+
+@media (max-width: 2500px){
+  .subrubros-title{
+    font-size: 2vh;
+  }
+}
+/* Responsive Styles */
+@media (max-width: 1200px) {
+
+  .father{
+    width: 100%;
+  }
+
+  .categorias{
+    width: 25%;
+  }
   
+  .header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 35vh;
+  }
+  .items-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .dropdown-holder{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  .items-header {
+    width: 100%;
+  }
+
+  .form-control{
+    width: 100px;
+  }
+
+  .header input {
+    width: 60%;
+  }
+
+  .table-holder {
+    width: 75%;
+  }
+
+
+  /*
+  .items-header,input{
+    position: absolute;
+  }
+  */
 }
 
-.input-holder{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+@media (max-width: 992px) {
+
+  .dropwdown-subrubros{
+    display: block;
+  }
+  .dropdown-holder{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .categorias{
+    display: none;
+  }
+
+  .header input {
+    width: 80%;
+  }
+
+  .table-holder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  
+    width: 98.9%;
+  }
 }
 
-form{
-  background: #171717;
-  height: 90%;
-  width: 60%;
-  padding: 2vh;
+@media (max-width: 768px) {
+
+  .categorias {
+    display: none;
+  }
+
+  .header input {
+    width: 90%;
+  }
+
+  .table-holder {
+    width: 100%;
+  }
+
+  .categorias {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
 }
-.row{
-  margin-top: 2vh;
+
+@media (max-width: 600px) {
+  .header{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+  .items-header{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+  .dropdown-holder{
+    margin-left: 3vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+  .form-control{
+    height: 5vh;
+    margin-left: 3vw;
+  }
+  .title-header {
+    font-size: 2vh;
+  }
+
+  .subrubros-title {
+    font-size: 4vh;
+  }
+
+  .categorias {
+    flex-direction: column;
+    width: 100%;
+  }
 }
