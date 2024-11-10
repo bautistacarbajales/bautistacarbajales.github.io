@@ -65,7 +65,7 @@ function renderizarTabla(data) {
           // Crear un encabezado para el subrubro
           let subrubroHeader = document.createElement("tr");
           subrubroHeader.innerHTML = `
-            <th colspan="15" class="subrubro-header">${rubro.nombre}</th>
+            <th colspan="15" id="${rubro.nombre.toLowerCase()}" class="subrubro-header">${rubro.nombre}</th>
           `;
           tableBody.appendChild(subrubroHeader);
 
@@ -242,9 +242,26 @@ function mostrarSubrubros(subrubros, rubro) {
 }
 
 
-
 //Only testing.
 //Busqueda por input.
+
+
+document.querySelector('.form-control[data-search]').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const tableRows = document.querySelectorAll('#tabla-body tr');
+
+  tableRows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+    
+    if (rowText.includes(searchTerm)) {
+      row.style.display = ''; // Mostrar la fila
+    } else {
+      row.style.display = 'none'; // Ocultar la fila
+    }
+  });
+});
+
 /*
 document.querySelector('.form-control[data-search]').addEventListener('input', function() {
   const searchTerm = this.value.toLowerCase();
@@ -254,27 +271,5 @@ document.querySelector('.form-control[data-search]').addEventListener('input', f
   );
   renderizarTabla(filteredData);
 });
-
-
-function moveSubrubrosToDropdown() {
-  const subrubrosList = document.getElementById('subrubros-list');
-  const dropdownHolder = document.querySelector('.dropdown-holder');
-
-  if (window.innerWidth < 750) {
-    if (!dropdownHolder.contains(subrubrosList)) {
-      dropdownHolder.appendChild(subrubrosList);
-    }
-  } else {
-    const categoriasSection = document.querySelector('.categorias');
-    if (!categoriasSection.contains(subrubrosList)) {
-      categoriasSection.appendChild(subrubrosList);
-    }
-  }
-}
-
-// Call the function on window resize
-window.addEventListener('resize', moveSubrubrosToDropdown);
-
-// Call the function on initial load
-document.addEventListener('DOMContentLoaded', moveSubrubrosToDropdown);
 */
+
