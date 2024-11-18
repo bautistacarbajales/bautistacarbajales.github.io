@@ -20,7 +20,7 @@
     <!--Titulo,Filtros y Buscador-->
     <section class="header">
       <div class="title-header">
-        <a href="/index.html">
+        <a href="../index.html">
           <img id="theme-icon" src="../bin/LazarilloIconWhite.png" class="rounded" alt="Lazarillo" height="100px" width="100px" />
         </a>
         <div class="title-divider">
@@ -230,6 +230,20 @@
             </ul>          
         </div>
 
+        <div class="dropdown">
+          <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Config ABM
+          </button>
+          <ul class="dropdown-menu">
+            <li class="list-group-item btn btn-info rounded">
+              <a href="php/listado-agrupaciones.php" class="dropdown-item">Crear agrup.</a>
+            </li>
+            <li class="list-group-item btn btn-info rounded">
+              <a href="php/asignar-agrupaciones.php" class="dropdown-item">Asignar agrup.</a>
+            </li>
+          </ul>
+        </div>
+        
         </div>
         <input class="form-control" type="text" placeholder="Busqueda por criterio" data-search />
       </div>
