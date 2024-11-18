@@ -61,12 +61,16 @@ body{
 }
 
 .header-logo{
+    padding: 0.5vw;
     width: 33%;
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 100%;
 }
+
+
+
 
 .header-title{
     width: 33%;
