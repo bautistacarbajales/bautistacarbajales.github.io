@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lazarillo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="tableStyle.css" />
+    <link rel="shortcut icon" href="../bin/LazarilloIconBlack.png"/>
+    <!--For embed Google icon code-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=contrast" />
+  </head>
+
+  <body>
+    <button id="theme-toggle" class="theme-toggle">
+      <span class="material-symbols-outlined button-toggle-mode" alt="Toggle Theme" height="30px" width="30px">
+        contrast
+      </span>
+    </button>
+    <!--Titulo,Filtros y Buscador-->
+    <section class="header">
+      <div class="title-header">
+        <a href="/index.html">
+          <img id="theme-icon" src="../bin/LazarilloIconWhite.png" class="rounded" alt="Lazarillo" height="100px" width="100px" />
+        </a>
+        <div class="title-divider">
+          <h3>Soluciones</h3>
+          <small>Conectamos con lo que no ves</small>
+        </div>
+      </div>
+    
+      <div class="items-header">
+        <div class="dropdown-holder">
+          <button class="btn btn-info" onclick="obtenerDatosMenu()">Cargar datos</button>
+          <!--
+          <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Seleccionar Tabla
+            </button>
+            <ul class="dropdown-menu">
+              <li onclick="obtenerDatosMenu()"><a class="dropdown-item" href="#">Menu</a></li>
+              <li onclick="obtenerDatosFacturacionPorFecha()"><a class="dropdown-item" href="#">Facturación</a></li>
+              <li onclick="obtenerDatosPedidosMostrador()"><a class="dropdown-item" href="#">Pedidos</a></li>
+            </ul>
+          </div>
+          -->
+          <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Seleccionar Subrubro
+            </button>
+            <ul class="dropdown-menu">
+              <li onclick="filtrarPorRubro('todos')"><a class="dropdown-item" href="#">Todos</a></li>
+              <li onclick="filtrarPorRubro('Comida')"><a class="dropdown-item" href="#">Comida</a></li>
+              <li onclick="filtrarPorRubro('Bebida')"><a class="dropdown-item" href="#">Bebida</a></li>
+              <li onclick="filtrarPorRubro('Cocteleria')"><a class="dropdown-item" href="#">Coceteleria</a></li>
+              <li onclick="filtrarPorRubro('Cafeteria')"><a class="dropdown-item" href="#">Cafeteria</a></li>
+              <li onclick="filtrarPorRubro('Combos')"><a class="dropdown-item" href="#">Combos</a></li>
+              <li onclick="filtrarPorRubro('Festejos')"><a class="dropdown-item" href="#">Festejos</a></li>
+              <li onclick="filtrarPorRubro('Pasteleria')"><a class="dropdown-item" href="#">Pasteleria</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown dropwdown-subrubros">
+            <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Seleccionar Rubro
+            </button>
+            <ul id="subrubros-list" class="dropdown-menu">
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#botellas">Botellas</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#bebidas sin alcohol">Bebidas sin alcohol</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#limonadas-jugos">Limonadas-Jugos</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#mocktail">Mocktail</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#bebidas sin terraza">Bebidas sin terraza</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#cervezas">Cervezas</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#cervezas 500cc">Cervezas 500cc</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#cervezas litro">Cervezas Litro</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#tragos clasicos">Tragos Clasicos</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#tragos caipis">Tragos Caipis</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#tragos autor">Tragos Autor</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#tragos frozen">Tragos Frozen</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#tragos directos">Tragos Directos</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#tragos tematicos">Tragos Temáticos</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="hamburguesas simples">Hamburguesas Simples</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#hamburguesas dobles">Hamburguesas Dobles</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#hamburguesas premium">Hamburguesas premium</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#sangucheria">Sangucheria</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#sandwiches-burritos">Sandwiches-Burritos</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#ensaladas-wrap">Ensaladas-Wrap</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#finger foods">Finger Foods</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#guarni platos S">Guarni Platos S</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#guarni platos m">Guarni platos M</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#guarniciones m">Guarniciones M</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#guarniciones l">Guarniciones L</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria,Comida">
+                <a href="#festejos">Festejos</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Bebida">
+                <a href="#festejos fc">Festejos FC</a>
+              </li>  <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#festejos tortas">Festejos Tortas</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+                <a href="#medidas">Medidas</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#elaborados">Elaborados</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Sinrubro">
+                <a href="#marketplace">Marketplace</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Combos,CombosResto,CombosMarketplace,Comida">
+                <a href="#promociones rec">Promociones Rec</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Combos,Cafeteria,CombosResto,CombosDomicilio,,SinRubro,CombosMarketplace,CostoPromedio,SinPrecio,FechasEspeciales,SinprecioComida,SinprecioTragos,HappyHourCoctel,HappyHourBirratlon,HappyNight2x1,FestejoComida,FestejoBebida,FestejoVarios,CombosArtistas,FestejosFC,Festejos+12,FestejosInfantes">
+                <a href="#promociones no-rec">Promociones No-rec</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria,Comida,Bebida">
+                <a href="#adicionales">Adicionales</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#para compartir">Para compartir</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#al plato">Al plato</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Bebida">
+                <a href="#kids mediodia">Kids Mediodia</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="menu personal">Menu Personal</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Comida,Bebida">
+                <a href="#para llevar">Para llevar</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Todos">
+                <a href="#kiosco">Kiosco</a>
+              </li> <!--Producto desconocido ?-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#postres">Postres</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Pasteleria">
+                <a href="#pasteleria">Pasteleria</a>
+              </li> <!--Tiene más rubros-->
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Bebida">
+                <a href="#cafeteria cold">Cafeteria Cold</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria">
+                <a href="#cafeteria hot">Cafeteria Hot</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria">
+                <a href="#cafeteria hot take">Cafeteria Hot Take</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Bebida">
+                <a href="#cafeteria especiales">Cafeteria Especiales</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Comida,Pasteleria">
+                <a href="#adicional cafeteria">Adicional Cafeteria</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+                <a href="#adicional salsa">Adicional Salsa</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida,Comida,Coteleria,Cafeteria,SinprecioComida">
+                <a href="#sin precio">Sin Precio</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Comida">
+                <a href="#sin precio c">Sin Precio C</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Bebida,SinprecioPostre">
+                <a href="#sin precio p">Sin Precio P</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Pasteleria">
+                <a href="sin precio m">Sin Precio M</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+                <a href="#merchandasing">Merchandansing</a>
+              </li>
+              <li class="list-group-item btn btn-info rounded" data-rubro="Pasteleria,Comida">
+                <a href="#panaderia">Panaderia</a>
+              </li>  
+            </ul>          
+        </div>
+
+        </div>
+        <input class="form-control" type="text" placeholder="Busqueda por criterio" data-search />
+      </div>
+    </section>
+
+    <!--Listado de opciones y Tabla-->
+    <div class="father">  
+      <section class="categorias">
+        <h5 class="subrubros-title rounded">Rubros</h5>  
+        <ul id="subrubros-list" class="list-group list-group-flush">
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#botellas">Botellas</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#bebidas sin alcohol">Bebidas sin alcohol</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#limonadas-jugos">Limonadas-Jugos</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#mocktail">Mocktail</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#bebidas sin terraza">Bebidas sin terraza</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#cervezas">Cervezas</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#cervezas 500cc">Cervezas 500cc</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#cervezas litro">Cervezas Litro</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#tragos clasicos">Tragos Clasicos</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#tragos caipis">Tragos Caipis</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#tragos autor">Tragos Autor</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#tragos frozen">Tragos Frozen</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#tragos directos">Tragos Directos</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#tragos tematicos">Tragos Temáticos</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="hamburguesas simples">Hamburguesas Simples</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#hamburguesas dobles">Hamburguesas Dobles</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#hamburguesas premium">Hamburguesas premium</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#sangucheria">Sangucheria</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#sandwiches-burritos">Sandwiches-Burritos</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#ensaladas-wrap">Ensaladas-Wrap</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#finger foods">Finger Foods</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#guarni platos S">Guarni Platos S</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#guarni platos m">Guarni platos M</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#guarniciones m">Guarniciones M</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#guarniciones l">Guarniciones L</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria,Comida">
+            <a href="#festejos">Festejos</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Bebida">
+            <a href="#festejos fc">Festejos FC</a>
+          </li>  <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#festejos tortas">Festejos Tortas</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria">
+            <a href="#medidas">Medidas</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#elaborados">Elaborados</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Sinrubro">
+            <a href="#marketplace">Marketplace</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Combos,CombosResto,CombosMarketplace,Comida">
+            <a href="#promociones rec">Promociones Rec</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Combos,Cafeteria,CombosResto,CombosDomicilio,,SinRubro,CombosMarketplace,CostoPromedio,SinPrecio,FechasEspeciales,SinprecioComida,SinprecioTragos,HappyHourCoctel,HappyHourBirratlon,HappyNight2x1,FestejoComida,FestejoBebida,FestejoVarios,CombosArtistas,FestejosFC,Festejos+12,FestejosInfantes">
+            <a href="#promociones no-rec">Promociones No-rec</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cocteleria,Comida,Bebida">
+            <a href="#adicionales">Adicionales</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#para compartir">Para compartir</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#al plato">Al plato</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Bebida">
+            <a href="#kids mediodia">Kids Mediodia</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="menu personal">Menu Personal</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Comida,Bebida">
+            <a href="#para llevar">Para llevar</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Todos">
+            <a href="#kiosco">Kiosco</a>
+          </li> <!--Producto desconocido ?-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#postres">Postres</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida,Pasteleria">
+            <a href="#pasteleria">Pasteleria</a>
+          </li> <!--Tiene más rubros-->
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Bebida">
+            <a href="#cafeteria cold">Cafeteria Cold</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria">
+            <a href="#cafeteria hot">Cafeteria Hot</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria">
+            <a href="#cafeteria hot take">Cafeteria Hot Take</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Bebida">
+            <a href="#cafeteria especiales">Cafeteria Especiales</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Comida,Pasteleria">
+            <a href="#adicional cafeteria">Adicional Cafeteria</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Comida">
+            <a href="#adicional salsa">Adicional Salsa</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida,Comida,Coteleria,Cafeteria,SinprecioComida">
+            <a href="#sin precio">Sin Precio</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Comida">
+            <a href="#sin precio c">Sin Precio C</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Cafeteria,Bebida,SinprecioPostre">
+            <a href="#sin precio p">Sin Precio P</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Pasteleria">
+            <a href="sin precio m">Sin Precio M</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Bebida">
+            <a href="#merchandasing">Merchandansing</a>
+          </li>
+          <li class="list-group-item btn btn-info rounded" data-rubro="Pasteleria,Comida">
+            <a href="#panaderia">Panaderia</a>
+          </li>
+        </ul>
+      </section> 
+
+      <div class="table-holder">
+        <table class="contenido rounded" id="tabla">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Venta ($)</th>
+              <th>Venta Competencia</th>
+              <th>Costo ($)</th>
+              <th>% Costo</th>
+              <th>% Objetivo</th>
+              <th>% Sugerido</th>
+              <th>$ Manual</th>
+              <th>Ventas (u)</th>
+              <th>Ganancia</th>
+              <th>Lista ($)</th>
+              <th>10% Off</th>
+              <th>20% Off</th>
+              <th>2x1</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-body">
+            <!-- Las filas se generarán dinámicamente aquí -->
+          </tbody>
+      </table>
+
+      </div>
+      
+    </div>
+
+    <script src="tableScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
